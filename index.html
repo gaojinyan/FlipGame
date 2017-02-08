@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Filpgame</title>
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<script type="text/javascript" src="./js/jquery.min.js"></script>
+</head>
+<body>
+	<div class="all">
+		<ul id="grid">
+			
+		</ul>
+	</div>
+	<script type="text/javascript">
+		
+		function drawGrids(){
+			for (var i = 0; i < 16; i++) {
+				var str = "<li>"+ i +"</li>";
+				$("#grid").append(str);
+				$('li:eq('+ i +')').html("<img src='./image/"+ a +".jpg' width='100%'>");
+			};
+		}
+		function rand(m) {
+		    var arr = new Array(m);
+		    arr[0] = 0;
+		    for (var i=1; i<m; i++) {
+		        var rnd = Math.floor(Math.random()*(i+1));
+		        arr[i] = arr[rnd];
+		        arr[rnd] = i;
+		    }
+		    return arr;
+		}
+		rand(8)
+		function create(){
+			var arr = [];
+			for (var i = 0; i < 4; i++){
+				arr[i] = [];
+				for(var j = 0; j < 4; j++){
+					arr[i].push(j);
+				}
+			}
+			return arr	
+		}
+		drawGrids()
+		create();
+	</script>
+</body>
+</html>
