@@ -22,10 +22,11 @@
 		function rand(m) {
 		    var randarr = new Array(m);
 		    for (var i = 0; i < m; i++) {
-		        var rnd = Math.floor(Math.random()*(i+1));
+		         var rnd = Math.floor(Math.random()*(i+1));
 		        randarr[i] = randarr[rnd];
 		        randarr[rnd] = i;
 		    }
+
 			var arr = [];
 			for (var i = 0; i < 4; i++){
 				arr[i] = [];
@@ -35,14 +36,14 @@
 			}
 			
 			//
-			for(var i = 0;i < randarr.length;i ++){
-				for(var j = 0;j < arr.length;j ++){
-					for(var k = 0; k < arr[j].length; k++){
-						arr[j][k] = randarr[i]
-					}
-				}
-			return arr
-			}
+			var i = 0;
+			var res = arr.map(function(ba){         
+			  return ba.map(function(bb){             
+			       i++
+			       return randarr[i-1]         
+			   })
+			})
+			return res;
 		}
 		rand(8)
 		drawGrids()
