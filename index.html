@@ -16,21 +16,16 @@
 			for (var i = 0; i < 16; i++) {
 				var str = "<li>"+ i +"</li>";
 				$("#grid").append(str);
-				$('li:eq('+ i +')').html("<img src='./image/"+ a +".jpg' width='100%'>");
+				$('li:eq('+ i +')').html("<img src='./image/"+ 1 +".jpg' width='100%'>");
 			};
 		}
 		function rand(m) {
-		    var arr = new Array(m);
-		    arr[0] = 0;
-		    for (var i=1; i<m; i++) {
+		    var randarr = new Array(m);
+		    for (var i = 0; i < m; i++) {
 		        var rnd = Math.floor(Math.random()*(i+1));
-		        arr[i] = arr[rnd];
-		        arr[rnd] = i;
+		        randarr[i] = randarr[rnd];
+		        randarr[rnd] = i;
 		    }
-		    return arr;
-		}
-		rand(8)
-		function create(){
 			var arr = [];
 			for (var i = 0; i < 4; i++){
 				arr[i] = [];
@@ -38,10 +33,19 @@
 					arr[i].push(j);
 				}
 			}
-			return arr	
+			
+			//
+			for(var i = 0;i < randarr.length;i ++){
+				for(var j = 0;j < arr.length;j ++){
+					for(var k = 0; k < arr[j].length; k++){
+						arr[j][k] = randarr[i]
+					}
+				}
+			return arr
+			}
 		}
+		rand(8)
 		drawGrids()
-		create();
 	</script>
 </body>
 </html>
