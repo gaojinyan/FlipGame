@@ -49,28 +49,54 @@
 			  return ba.map(function(bb){             
 			       i++
 			       return randArr[i-1]         
-			   })
-			})
+			   });
+			});
+
+			// var c = 0;
+			// var a = [];
+			// for (var i = 0; i < 8; i++){
+			// 	a[i] = [];
+			// 	for(var j = 0; j < 2; j++){
+			// 		a[i][j] = randArr[c];
+			// 		var str = "<li>"+ c +"</li>";
+			// 			$("#grid").append(str);
+			// 			$('li:eq('+ c +')').html("<div class='back'><img src='./image/" + i + ".jpg' width='100%' index='"+i+"'></div><div class='front'><img src='./image/all.jpg' width='100%'></div>");
+			// 			c++;
+
+			// 	}
+			// }
+			// console.log(a);
 			//根据坐标显示图片
 			var newImg = [];
 			for(var i = 0; i < res.length; i++){
 				for(var j = 0; j < res[i].length;j++){
- 					newImg.push( './image/' + res[i][j] + '.jpg');
+ 					newImg.push(  res[i][j]);
 				}
 			}
-			console.log(newImg)
 			for (var i = 0; i < newImg.length; i++) {
-				var str = "<li>"+ i +"</li>";
+				var str = "<li value="+newImg[i]+">"+ i +"</li>";
 				$("#grid").append(str);
-				$('li:eq('+ i +')').html("<div class='back'><img src='" + newImg[i] + "' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div>");
+				$('li:eq('+ i +')').html("<div class='back' ><img src='./image/" + newImg[i] + ".jpg' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div>");
 			};
 		}
 		rand(8)
 		function dian(){
+				var count = 0;
 				$('body').on('click','li',function(){
 					var index = $(this).index();
+					var backIndex = $(this).attr("value");
+					var before = backIndex;
 					$('li:eq('+ index +') .back').css('z-index','2')
-				})
+					setTimeout("$('li:eq("+ index +") .back').css('z-index','-1')",1000)
+					count ++; 
+					if(count/2 == 0){
+						var	later = $(this).attr("value");
+						if(before == later){
+								$('li:eq('+ index +') .back').css('z-index','2')
+						}
+					}
+					
+				});
 		}
 		dian()
 		
