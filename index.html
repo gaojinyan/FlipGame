@@ -81,25 +81,43 @@
 		}
 		rand(8)
 		function dian(){
-				var count = 0;
+				var before = null;
+				var beforeIndex = null;
 				$('body').on('click','li',function(){
 					var index = $(this).index();
+
 					var backIndex = $(this).attr("value");
-					var before = backIndex;
-					$('li:eq('+ index +') .back').css('z-index','2')
-					setTimeout("$('li:eq("+ index +") .back').css('z-index','-1')",1000)
-					count ++; 
-					if(count/2 == 0){
-						var	later = $(this).attr("value");
-						if(before == later){
-								$('li:eq('+ index +') .back').css('z-index','2')
+					if(before === null && beforeIndex === null){
+						before = backIndex;
+						beforeIndex = index;
+						$('li:eq('+ index +') .back').css('z-index','2')
+					}else{
+						$('li:eq('+ index +') .back').css('z-index','2')
+						if(index == beforeIndex){
+							return false;
 						}
+						if(before == backIndex){
+							$('li:eq('+ beforeIndex +') .back').css('z-index','2')
+							$('li:eq('+ index +') .back').css('z-index','2')
+							$('li:eq('+ beforeIndex +') .back').hide()
+							$('li:eq('+ index +') .back').hide()
+							$('li:eq('+ beforeIndex +') .front').hide()
+							$('li:eq('+ index +') .front').hide()
+							before = null;
+							beforeIndex = null;
+						}else{
+							
+							$('li:eq('+ index+') .back').css('z-index','2');
+							 setTimeout('$("li:eq('+ beforeIndex +') .back").css("z-index","-1"); $("li:eq('+ index+') .back").css("z-index","-1")',500);
+							before = null;
+							beforeIndex = null;
+						}
+						 
 					}
 					
 				});
 		}
 		dian()
-		
 	</script>
 </body>
 </html>
