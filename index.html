@@ -19,7 +19,7 @@
 	</div>
 	<script type="text/javascript">
 		
-		function rand(m) {
+		function rand(m,n) {
 			//随机打乱数组
 		    var randArr = [];
 		    for(var j = 0; j < 2;j++){
@@ -36,9 +36,9 @@
 		    }
 		    //生成坐标二维数组
 			var arr = [];
-			for (var i = 0; i < 4; i++){
+			for (var i = 0; i < n; i++){
 				arr[i] = [];
-				for(var j = 0; j < 4; j++){
+				for(var j = 0; j < n; j++){
 					arr[i].push(j);
 				}
 			}
@@ -76,11 +76,12 @@
 			for (var i = 0; i < newImg.length; i++) {
 				var str = "<li value="+newImg[i]+">"+ i +"</li>";
 				$("#grid").append(str);
-				$('li:eq('+ i +')').html("<div class='back' ><img src='./image/" + newImg[i] + ".jpg' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div>");
+				$('li:eq('+ i +')').html("<div class='pai'><div class='back' ><img src='./image/" + newImg[i] + ".jpg' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div></div>");
 			};
 		}
-		rand(8)
+		rand(8,4)
 		function dian(){
+				var  count = 0;
 				var before = null;
 				var beforeIndex = null;
 				$('body').on('click','li',function(){
@@ -99,10 +100,9 @@
 						if(before == backIndex){
 							$('li:eq('+ beforeIndex +') .back').css('z-index','2')
 							$('li:eq('+ index +') .back').css('z-index','2')
-							$('li:eq('+ beforeIndex +') .back').hide()
-							$('li:eq('+ index +') .back').hide()
-							$('li:eq('+ beforeIndex +') .front').hide()
-							$('li:eq('+ index +') .front').hide()
+							$('li:eq('+ beforeIndex +') .pai').hide()
+							$('li:eq('+ index +') .pai').hide()
+							count ++;
 							before = null;
 							beforeIndex = null;
 						}else{
@@ -113,6 +113,9 @@
 							beforeIndex = null;
 						}
 						 
+					}
+					if(count == 8){
+						alert('success')
 					}
 					
 				});
