@@ -20,13 +20,18 @@
 			color: #fff;
 			cursor: pointer;
 		}
+		.all h1{
+			text-align: center;
+			padding: 20px 0;
+		}
 	</style>
 <body>
 	<div class="all">
+		<h1>翻牌记忆游戏</h1>
 		<ul id="grid">
 			
 		</ul>
-	<button class="newbtn" value="">开始</button>
+	<!-- <input type="button" id="btn" value="开始" onclick="settime(this)" class="newbtn"/>    -->
 	<button class="btn">重新开始</button>
 	</div>
 	<script type="text/javascript">
@@ -77,11 +82,12 @@
 				$('li:eq('+ i +')').html("<div class='pai'><div class='back' ><img src='./image/" + newImg[i] + ".jpg' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div></div>");
 			};
 		}
-		rand(8,4)
+		
 		function dian(){
 				var  count = 0;
 				var before = null;
 				var beforeIndex = null;
+				var isback = 
 				$('body').on('click','li',function(){
 					var index = $(this).index();
 
@@ -97,7 +103,7 @@
 						}
 						if(before == backIndex){
 							$('li:eq('+ beforeIndex +') .back').css('z-index','2')
-							$('li:eq('+ index +') .back').css('z-index','2')
+							setTimeout("$('li:eq("+ index +") .back').css('z-index','2')",1000)
 							$('li:eq('+ beforeIndex +') .pai').hide()
 							$('li:eq('+ index +') .pai').hide()
 							count ++;
@@ -115,23 +121,32 @@
 					if(count == 8){
 						alert('success!');
 					}
-					
 				});
 		}
-		
-			var countdown = 20;
-			function again(val){
-				dian()
-				countdown--;
-				$('.again').value=countdown;
-			}
-			setTimeout(function() { again(20) },1000) 
 
-			function refresh(){
-				window.location.reload();
-			}
-			$('.btn').on('click',refresh);	
-			$('.newbtn').on('click',again(20));
+		// 刷新页面
+		function refresh(){
+			window.location.reload();
+		}
+			
+		
+
+		// var countDown = 10;   
+		// function settime (obj) {
+		//     if (countDown == 0) {   
+		//         obj.removeAttribute("disabled");      
+		//         obj.value="开始";   
+		//         countDown = 30;  
+		//         return dian();  
+		//     } else {   
+		//         obj.setAttribute("disabled", true);   
+		//         obj.value = countDown;   
+		//         countDown--;   
+		//     }   
+		// setTimeout(function() { settime(obj) },1000)   } 
+		dian()
+		rand(8,4)
+		$('.btn').on('click',refresh);
 	</script>
 </body>
 </html>
