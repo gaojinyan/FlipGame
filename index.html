@@ -87,7 +87,6 @@
 				var  count = 0;
 				var before = null;
 				var beforeIndex = null;
-				var isback = 
 				$('body').on('click','li',function(){
 					var index = $(this).index();
 
@@ -106,7 +105,7 @@
 							setTimeout("$('li:eq("+ index +") .back').css('z-index','2')",1000)
 							$('li:eq('+ beforeIndex +') .pai').hide()
 							$('li:eq('+ index +') .pai').hide()
-							count ++;
+							count++
 							before = null;
 							beforeIndex = null;
 						}else{
