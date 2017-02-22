@@ -35,22 +35,29 @@
 	<button class="btn">重新开始</button>
 	</div>
 	<script type="text/javascript">
-		
-		function rand(m,n) {
-			//随机打乱数组
+		function rand(m) {
+			
 		    var randArr = [];
 		    for(var j = 0; j < 2;j++){
 			    for (var i = 0; i < m; i++) {
 			    	randArr.push(i)
 			    }
 		    }
-		   for(var i = randArr.length-1; i >=0; i--){
+		    random(randArr)
+		    arrs(4, randArr)
+		}
+		function random(data){
+			//随机打乱数组
+		   	for(var i = data.length-1; i >=0; i--){
 		        var randomIndex = Math.floor(Math.random()*(i+1)); 
-		        var itemAtIndex = randArr[randomIndex]; 
-		        randArr[randomIndex] = randArr[i]; 
-		        randArr[i] = itemAtIndex;
+		        var itemAtIndex = data[randomIndex]; 
+		        data[randomIndex] = data[i]; 
+		        data[i] = itemAtIndex;
 
 		    }
+		} 
+			
+		function arrs(n,data){
 		    //生成坐标二维数组
 			var arr = [];
 			for (var i = 0; i < n; i++){
@@ -59,21 +66,23 @@
 					arr[i].push(j);
 				}
 			}
-			
 			//把打乱的数组放入二维数组里
 			var i = 0;
 			var res = arr.map(function(ba){         
 			  return ba.map(function(bb){             
 			       i++
-			       return randArr[i-1]         
+			       return data[i-1]         
 			   });
 			});
+			img(res)
+		}
 
+		function img(resdata){
 			//根据坐标显示图片
 			var newImg = [];
-			for(var i = 0; i < res.length; i++){
-				for(var j = 0; j < res[i].length;j++){
- 					newImg.push(  res[i][j]);
+			for(var i = 0; i < resdata.length; i++){
+				for(var j = 0; j < resdata[i].length;j++){
+ 					newImg.push(  resdata[i][j]);
 				}
 			}
 			for (var i = 0; i < newImg.length; i++) {
@@ -82,6 +91,7 @@
 				$('li:eq('+ i +')').html("<div class='pai'><div class='back' ><img src='./image/" + newImg[i] + ".jpg' width='100%'></div><div class='front'><img src='./image/all.jpg' width='100%'></div></div>");
 			};
 		}
+		
 		
 		function dian(){
 				var  count = 0;
@@ -127,24 +137,9 @@
 		function refresh(){
 			window.location.reload();
 		}
-			
-		
-
-		// var countDown = 10;   
-		// function settime (obj) {
-		//     if (countDown == 0) {   
-		//         obj.removeAttribute("disabled");      
-		//         obj.value="开始";   
-		//         countDown = 30;  
-		//         return dian();  
-		//     } else {   
-		//         obj.setAttribute("disabled", true);   
-		//         obj.value = countDown;   
-		//         countDown--;   
-		//     }   
-		// setTimeout(function() { settime(obj) },1000)   } 
+			 
 		dian()
-		rand(8,4)
+		rand(8)
 		$('.btn').on('click',refresh);
 	</script>
 </body>
