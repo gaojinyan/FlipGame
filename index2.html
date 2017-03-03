@@ -128,6 +128,7 @@
 							stateArr[beforePos.row][beforePos.col] = -1;
 							$('.row:eq('+ beforePos.row +')').find('img:eq('+ beforePos.col +')').hide();
 							$('.row:eq('+ row +')').find('img:eq('+ column +')').hide();
+							count ++;
 						} else{
 							 setTimeout("$('.row:eq("+ row +")').find('img:eq("+ column +")').attr('src','./image/all.jpg');$('.row:eq("+ beforePos.row +")').find('img:eq("+ beforePos.col +")').attr('src','./image/all.jpg')",500)
 							clickCount = 0;
@@ -137,14 +138,17 @@
 						beforePos["row"] = row;
 						beforePos["col"] = column;
 					}
-				console.log(stateArr)
+					if(count == 8){
+						alert('success!')
+					}
 				})
 			}
 			// 刷新页面
 			function refresh(){
 				window.location.reload();
 			}
-
+			
+			var count = 0
 			var gameSize = 4;
 			var clickCount = 0;
 			var beforePos = {};
